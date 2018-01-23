@@ -1,9 +1,12 @@
-
+    
 
 <!DOCTYPE html>
 <html>
 <head>
   <title>A Psychic Game</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+
 </head>
 <body>
     <div class="container">
@@ -57,11 +60,11 @@
           if (psychicGuess===compLetter) {
             userWins++;
             console.log(numGuess);
-            alert("Congratulations! You entered: " + psychicGuess );
-            upDate();
+            alert("Congratulations! You entered: " + psychicGuess +", which was the letter I was thinking of—you may have psychic abilities. Let's see how you do on the next round?" );
+            reSet();
             } else {
               // entryCheck();
-              guessHistory.push(psychicGuess);
+              guessHistory.push(" " + psychicGuess);
               console.log("Guess History= " + guessHistory)
               numGuess--;
               console.log("number of guesses: " + numGuess);
@@ -84,6 +87,19 @@
 
         }
 
+        function reSet(){
+        var numGuess=8;
+        var guessHistory = [];
+        var updateHTML = "<h3> You have entered: " + guessHistory + "</h3>" + 
+        "<p> </p>" +
+        "<h4> You have " + numGuess + "<h4> guesses remaining.</h4>" +
+        "<p></p>" +
+        "<h4> You have guessed correctly</h4>" + userWins + "<h4> times</h4>" +
+        "<p></p>" +
+        "<h4> you have guessed incorrectly</h4>" + userLoss + "<h4> times</h4>"
+        document.querySelector("#reLoad").innerHTML = updateHTML;
+
+      }
 
         // If the first character in the current animal is "c" or "o", alert the following message.
       //   if (psychicGuess=previous && previous != compLetter){
