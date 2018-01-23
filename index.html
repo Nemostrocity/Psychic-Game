@@ -1,5 +1,3 @@
-    
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +9,9 @@
 <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-offset-1 col-md-10">
           <div class="jumbotron">
-             <h2>Guess which letter I (the computer) am thinking of...and hit the appropriate key.</h2>
+             <h2>Guess which letter I (the computer) am thinking of...</h2>
               <span id="reLoad"></span>
           </div>
         </div>
@@ -22,139 +20,83 @@
 
     
     <script type="text/javascript">
-      //array for possible legal entries by user
       var alphaBet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
-      //randomly assigns letter for user to guess
-      var compLetter = alphaBet[Math.floor(Math.random() * alphaBet.length)];
-      //log's computer's letter for debugging
-      console.log("computer's Letter:" + compLetter);
-      // var psychicGuess = document.getElementById("userScore");
-      //assigns variable for number of tries user gets
-      var numGuess = 8;
+      //holds the number of remaining guesses
+      var numGuess = 7;
       //records number of wins user gets
       var userWins = 0;
       //Records number of times user fails to guess letter
       var userLoss = 0;
       //Records user's guess History
       var guessHistory = [];
-      //records user's total games
+      
+      var compLetter = alphaBet[Math.floor(Math.random() * alphaBet.length)];
 
 
-
-
-
-      for (var i = 0; i < numGuess; i++) {
-
+        //log's computer's letter for debugging
+        console.log("compLetter " + compLetter);
         //records user's key choice
         document.onkeyup = function(event) 
-        {
-
+        { 
           //assigns user's key choice to variable psychicGuess
           var psychicGuess = event.key;
-          //log's user's letter for debugging
           console.log("user Letter " + psychicGuess);
+
+          //log's user's letter for debugging
 
           if (psychicGuess===compLetter) {
             userWins++;
             console.log(numGuess);
             alert("Congratulations! You entered: " + psychicGuess +", which was the letter I was thinking of—you may have psychic abilities. Let's see how you do in the next round?" );
             guessHistory.length = 0;
+            compLetter = alphaBet[Math.floor(Math.random() * alphaBet.length)];            
+            console.log("compLetter " + compLetter);
             numGuess=8;
             reSet();
-            } else {
-              // entryCheck();
+            } 
+            else {
               guessHistory.push(" " + psychicGuess);
               console.log("Guess History= " + guessHistory)
-              numGuess--;
               console.log("number of guesses: " + numGuess);
               upDate();
-            };
+              };
             if (numGuess < 1){
               alert("Perhaps you might try thinking harder...you missed on this one.")
               userLoss++;
               guessHistory.length = 0;
               numGuess=8;
+              compLetter = alphaBet[Math.floor(Math.random() * alphaBet.length)];            
+              console.log("compLetter " + compLetter);
               upDate(); 
-            } else { 
-            }
-        };
-       
-      };
+              } 
+              else { 
+              numGuess--;
+              };       
+           }
     
-
-
       function upDate(){
-        var updateHTML = "<h3> You have entered: " + guessHistory + "</h3>" + 
+        var updateHTML = "<h3>You have entered: " + guessHistory + "</h3>" + 
         "<p> </p>" +
-        "<h4> You have " + numGuess + "<h4> guesses remaining.</h4>" +
+        "<h4>You have " + numGuess + " guesses remaining.</h4>" +
         "<p></p>" +
-        "<h4> You have guessed correctly</h4>" + userWins + "<h4> times</h4>" +
+        "<h4>You have guessed correctly " + userWins + " times</h4>" +
         "<p></p>" +
-        "<h4> you have guessed incorrectly</h4>" + userLoss + "<h4> times</h4>"
+        "<h4>You have guessed incorrectly " + userLoss + " times</h4>"
         document.querySelector("#reLoad").innerHTML = updateHTML;
-
         }
 
         function reSet(){
         var numGuess=8;
-        var resetHTML = "<h3> You have entered: " + guessHistory + "</h3>" + 
+        var resetHTML = "<h3>You have entered: " + guessHistory + "</h3>" + 
         "<p> </p>" +
-        "<h4> You have " + numGuess + "<h4> guesses remaining.</h4>" +
+        "<h4>You have " + numGuess + " guesses remaining.</h4>" +
         "<p></p>" +
-        "<h4> You have guessed correctly</h4>" + userWins + "<h4> times</h4>" +
+        "<h4>You have guessed correctly " + userWins + " times</h4>" +
         "<p></p>" +
-        "<h4> you have guessed incorrectly</h4>" + userLoss + "<h4> times</h4>"
+        "<h4>You have guessed incorrectly " + userLoss + " times</h4>"
         document.querySelector("#reLoad").innerHTML = resetHTML;
-
-
         }
-
-    //     function entryCheck (previous) {
-    //     var userKey = alphaBet.length;
-    //     for (var j = 0; j < userKey; j++) {
-    //     (alphaBet.index[j]);
-    //     console.log ("alphaBet index value " + alphaBet.index[j]);
-    //   }
-    // }
-
-
-        // If the first character in the current animal is "c" or "o", alert the following message.
-      //   if (psychicGuess=previous && previous != compLetter){
-      //     guessHistory.push(psychicGuess);
-      //         console.log("Guess History= " + guessHistory)
-      //         numGuess--;
-      //         console.log("number of guesses: " + numGuess);
-      //         upDate();
-
-      //   } else {
-
-      //   }
-      // }
-//         if (numGuess==0){
-
-//           userLoss++;
-//             alert ("First test over, would you like to play again? ");
-// } else {
-//             alert ("Game Over, chances are you may not have 'Psychic Powers' ")
-//           }
-//         };
-
-
-        //establishes variable for publishing to html
-        // var html = (
-
-        // "<h3> You have entered: " + guessHistory + "</h3>" + 
-        // "<p> </p>" +
-        // "<h4> You have " + numGuess + "<h4> guesses remaining.</h4>" +
-        // "<p></p>" +
-        // "<h4> You have guessed correctly</h4>" + userWins + "<h4> times</h4>" +
-        // "<p></p>" +
-        // "<h4> you have guessed incorrectly</h4>" + userLoss + "<h4> times</h4>" 
-        // );
-
-
-
-        // document.querySelector("#userScore").innerHTML = html;
+    
     </script>
   </body>
-</html>	
+</html> 
